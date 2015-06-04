@@ -120,14 +120,14 @@ function Spellcaster(name, health, mana){
    * @param  {number} cost      The amount of mana to spend.
    * @return {boolean} success  Whether mana was successfully spent.
    */
-this.spendMana = function(cost){
-  if(this.mana <= cost){
-    return false;
-  }else{
-    this.mana -= cost;
-    return true;
+  this.spendMana = function(cost){
+    if(this.mana < cost){
+      return false;
+    }else{
+      this.mana -= cost;
+      return true;
+    }
   }
-}
   /**
    * @method invoke
    *
@@ -154,6 +154,33 @@ this.spendMana = function(cost){
    * @param  {Spellcaster} target         The spell target to be inflicted.
    * @return {boolean}                    Whether the spell was successfully cast.
    */
+  this.invoke = function(spell, target){
+    if(spell instanceof Spell && !(spell instanceof DamageSpell)){
 
+        if (this.mana >= spell.cost){
+          console.log('before spend');
+          this.spendMana(spell.cost);
+          console.log('after spend');
+          return true;
+        }
+        else{
+          return false;
+        }
 
+    }
+    else if(spell instanceof DamageSpell && (target instanceof Spellcaster)){
+      if (this.mana >= spell.cost){
+          target.inflictDamage(spell.damage);
+          this.spendMana(spell.cost);
+          return true;
+        }
+        else{
+          return false;
+        }
+    }
+    else{
+      console.log("fail");
+      return false;
+    }
+  }
 }
