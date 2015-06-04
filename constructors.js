@@ -16,8 +16,6 @@ function Spell(name, cost, description){
     this.cost = cost;
     this.description = description;
 
-
-
   /**
    * @method printDetails
    *
@@ -31,7 +29,6 @@ function Spell(name, cost, description){
    this.printDetails = function(){
     console.log('The spell ' + this.name + ' costs ' + this.cost + ' coins and ' + this.description);
    }
-
 }
 /**
  * A spell that deals damage.
@@ -57,6 +54,18 @@ function Spell(name, cost, description){
  * @property {number} damage
  * @property {string} description
  */
+
+function DamageSpell(name, cost, damage, description){
+  Spell.call(this, name, cost, description);
+  this.damage = damage;
+}
+
+DamageSpell.prototype = Object.create(Spell.prototype, {
+  constructor: {
+    value: Spell
+  }
+});
+
 
 /**
  * Now that you've created some spells, let's create
