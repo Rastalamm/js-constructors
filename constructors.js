@@ -11,9 +11,16 @@
  * @method   printDetails
  */
 
+function Spell(name, cost, description){
+    this.name = name;
+    this.cost = cost;
+    this.description = description;
+
+
+
   /**
    * @method printDetails
-   * 
+   *
    * Print out all spell details and format it nicely.
    * The format doesnt matter, as long as it contains the spell name, cost, and description.
    *
@@ -21,6 +28,11 @@
    * e.g. console.log(a, b, c); <-- no commas, please use string concatenation.
    */
 
+   this.printDetails = function(){
+    console.log('The spell ' + this.name + ' costs ' + this.cost + ' coins and ' + this.description);
+   }
+
+}
 /**
  * A spell that deals damage.
  * We want to keep this code DRY (Don't Repeat Yourself).
@@ -65,7 +77,7 @@
 
   /**
    * @method inflictDamage
-   * 
+   *
    * The spellcaster loses health equal to `damage`.
    * Health should never be negative.
    * If the spellcaster's health drops to 0,
@@ -76,7 +88,7 @@
 
   /**
    * @method spendMana
-   * 
+   *
    * Reduces the spellcaster's mana by `cost`.
    * Mana should only be reduced only if there is enough mana to spend.
    *
@@ -86,7 +98,7 @@
 
   /**
    * @method invoke
-   * 
+   *
    * Allows the spellcaster to cast spells.
    * The first parameter should either be a `Spell` or `DamageSpell`.
    * If it is a `DamageSpell`, the second parameter should be a `Spellcaster`.
